@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+  <h1>Заклади Освіти
+  <a href="{% url 'zno2020_results:institution-create' %}" class="btn btn-primary link-to-page">
+    Створити
+  </a>
+  </h1>
+  {% if institution_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th>Оновити</th>
+        <th>Видалити</th>
+      </tr>
+    {% for institution in institution_list %}
+      <tr>
+        <td>{{ institution.id }}</td>
+        <td>{{ institution.name }}</td>
+        <td>{{ institution.type }}</td>
+        <td>
+          <a href="{% url 'zno2020_results:institution-update' pk=institution.id %}" class="btn btn-secondary link-to-page">
+            Оновити
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'zno2020_results:institution-delete' pk=institution.id %}" class="btn btn-danger link-to-page">
+            Видалити
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+      <p>Список закладів Освіти порожній.</p>
+    {% endif %}
+{% endblock %}

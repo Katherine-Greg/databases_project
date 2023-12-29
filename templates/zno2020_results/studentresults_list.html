@@ -1,0 +1,44 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+  <h1>
+    Результати ЗНО 2020
+  <a href="{% url 'zno2020_results:studentresults-create' %}" class="btn btn-primary link-to-page">
+    Створити
+  </a>
+  </h1>
+  {% if studentresults_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Учасник</th>
+        <th>Статус</th>
+        <th>Результат Укр мова 100</th>
+        <th>Результат Укр мова 12</th>
+        <th>Оновити</th>
+        <th>Видалити</th>
+      </tr>
+    {% for result in studentresults_list %}
+      <tr>
+        <td>{{ result.id }}</td>
+        <td><a href="{% url 'zno2020_results:student-detail' pk=result.student.id %}">{{ result.student.id }}</a></td>
+        <td>{{ result.status }}</td>
+        <td>{{ result.ukrball100 }}</td>
+        <td>{{ result.ukrball12 }}</td>
+        <td>
+          <a href="{% url 'zno2020_results:studentresults-update' pk=result.id %}" class="btn btn-secondary link-to-page">
+            Оновити
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'zno2020_results:studentresults-delete' pk=result.id %}" class="btn btn-danger link-to-page">
+            Видалити
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+      <p>Список результатів порожній.</p>
+    {% endif %}
+{% endblock %}

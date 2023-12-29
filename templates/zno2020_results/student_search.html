@@ -1,0 +1,54 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+
+<h1>Результати пошуку студентів</h1>
+
+<form method="GET" action="">
+    <label for="id_birth_year">Рік народження:</label>
+    <input type="text" name="birth_year" id="id_birth_year" value="{{ request.GET.birth_year }}">
+    <br>
+    <label for="id_sex">Стать:</label>
+    <input type="text" name="sex" id="id_sex" value="{{ request.GET.sex }}">
+    <br>
+    <label for="id_type">Тип:</label>
+    <input type="text" name="type" id="id_type" value="{{ request.GET.type }}">
+    <br>
+    <label for="id_location">Населений пункт:</label>
+    <input type="text" name="location" id="id_location" value="{{ request.GET.location }}">
+    <br>
+    <label for="id_institution">Заклад освіти:</label>
+    <input type="text" name="institution" id="id_institution" value="{{ request.GET.institution }}">
+
+
+
+    <input type="submit" value="Пошук">
+</form>
+
+{% if students %}
+
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Рік народження</th>
+        <th>Стать</th>
+        <th>Тип</th>
+        <th>Заклад Освіти</th>
+        <th>Місце проживання</th>
+      </tr>
+    {% for student in students %}
+      <tr>
+        <td><a href="{% url 'zno2020_results:student-detail' pk=student.id %}">{{ student.id }}</a></td>
+        <td>{{ student.birth_year }}</td>
+        <td>{{ student.sex }}</td>
+        <td>{{ student.type }}</td>
+        <td>{{ student.institution.name }}</td>
+        <td>{{ student.location.region_name }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>Немає результатів.</p>
+{% endif %}
+
+{% endblock %}

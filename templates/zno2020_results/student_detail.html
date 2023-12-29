@@ -1,0 +1,20 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+  <h2>
+    Student: {{ student.id }}
+  </h2>
+  <a href="{% url 'zno2020_results:student-delete' pk=student.id %}" class="btn btn-danger link-to-page">
+    Delete
+  </a>
+
+  <a href="{% url 'zno2020_results:student-update' pk=student.id %}" class="btn btn-secondary link-to-page">
+    Update
+  </a>
+
+  <p><strong>Birth Year:</strong> {{ student.birth_year }}</p>
+  <p><strong>Sex:</strong> {{ student.sex }}</p>
+  <p><strong>Type:</strong> {{ student.type }}</p>
+  <p><strong>Region Name:</strong> {{ student.location.region_name }}</p>
+  <p><strong>Institution:</strong> {{ student.institution.name }}</p>
+{% endblock %}

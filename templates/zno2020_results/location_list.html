@@ -1,0 +1,44 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+  <h1>
+    Міста учасників
+  <a href="{% url 'zno2020_results:location-create' %}" class="btn btn-primary link-to-page">
+    Створити
+  </a>
+  </h1>
+  {% if location_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Регіон</th>
+        <th>Область</th>
+        <th>Назва населеного пункту</th>
+        <th>Тип населеного пункту</th>
+        <th>Оновити</th>
+        <th>Видалити</th>
+      </tr>
+    {% for location in location_list %}
+      <tr>
+        <td>{{ location.id }}</td>
+        <td>{{ location.region_name }}</td>
+        <td>{{ location.area_name }}</td>
+        <td>{{ location.territory_name }}</td>
+        <td>{{ location.territory_type }}</td>
+        <td>
+          <a href="{% url 'zno2020_results:location-update' pk=location.id %}" class="btn btn-secondary link-to-page">
+            Оновити
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'zno2020_results:location-delete' pk=location.id %}" class="btn btn-danger link-to-page">
+            Видалити
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+      <p>Список результатів порожній.</p>
+    {% endif %}
+{% endblock %}

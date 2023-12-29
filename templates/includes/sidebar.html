@@ -1,0 +1,8 @@
+{% load crispy_forms_filters %}
+
+<ul class="sidebar-nav list-group">
+  <li class="list-group-item"><a href="{% url 'zno2020_results:index' %}">Домашня сторінка</a></li>
+  <li class="list-group-item"><a href="{% url 'zno2020_results:student-list' %}">Учасники</a></li>
+  <li class="list-group-item"><a href="{% url 'zno2020_results:institution-list' %}">Заклади Освіти</a></li>
+  <li class="list-group-item"><a href="{% url 'zno2020_results:studentresults-list' %}">Результати</a></li>
+</ul>

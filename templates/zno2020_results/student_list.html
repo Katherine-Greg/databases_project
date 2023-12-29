@@ -1,0 +1,48 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+  <h1>Учасники
+  <a href="{% url 'zno2020_results:student-create' %}" class="btn btn-primary link-to-page">
+    Створити
+  </a>
+  <a href="{% url 'zno2020_results:student-search' %}" class="btn btn-primary link-to-page">
+    Пошук
+  </a>
+  </h1>
+  {% if student_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Рік народження</th>
+        <th>Стать</th>
+        <th>Тип</th>
+        <th>Заклад Освіти</th>
+        <th>Місце проживання</th>
+        <th>Оновити</th>
+        <th>Видалити</th>
+      </tr>
+    {% for student in student_list %}
+      <tr>
+        <td><a href="{% url 'zno2020_results:student-detail' pk=student.id %}">{{ student.id }}</a></td>
+        <td>{{ student.birth_year }}</td>
+        <td>{{ student.sex }}</td>
+        <td>{{ student.type }}</td>
+        <td>{{ student.institution.name }}</td>
+        <td>{{ student.location.region_name }}</td>
+        <td>
+          <a href="{% url 'zno2020_results:student-update' pk=student.id %}" class="btn btn-secondary link-to-page">
+            Оновити
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'zno2020_results:student-delete' pk=student.id %}" class="btn btn-danger link-to-page">
+            Видалити
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+      <p>Список учасники порожній.</p>
+    {% endif %}
+{% endblock %}

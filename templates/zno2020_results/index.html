@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+  <h1>ZNO 2020 Results</h1>
+  <h2>This page contains information about ZNO 2020</h2>
+
+  <p>The Results have the following record counts:</p>
+  <ul>
+    <li><strong>Students:</strong> {{ num_students }}</li>
+    <li><strong>Institutions:</strong> {{ num_instituts }}</li>
+  </ul>
+
+  <p>You have visited this page
+    {{ num_visits }} time{{ num_visits|pluralize }}.
+  </p>
+
+{% endblock %}
